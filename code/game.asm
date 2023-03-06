@@ -25,7 +25,7 @@ playery dw  05h                      ; Posicion y del player
 tPlayerx dw 05h                      ; Posicion temporal x del player
 tPlayery dw 05h                      ; Posicion temporal y del player
 playerv dw  0ah                      ; Velocidad del player
-playerc dw  0dh                      ; Color del player
+playerc dw  0eh                      ; Color del player
 players dw  05h                      ; Altura y ancho del player
 playerm dw  00h                      ; Ultima direccion del player (0 der, 1 aba, 2 izq, 3 arr)
 
@@ -42,15 +42,15 @@ wallsi dw 00h                       ; Indice para contar las paredes
 wallx dw 00h                        ; Posicion x de la pared actual
 wally dw 00h                        ; Posicion y de la pared actual
 
-wallsx1 dw 65, 65, 65, 65, 65, 65, 75, 85, 35, 45, 85, 95, 35, 45, 85, 95, 35, 45, 85, 95, 45, 55, 65, 75, 85, 55, 65, 75 ; Posicion x de las paredes nivel 1
-wallsy1 dw 35, 35, 35, 35, 35, 35, 45, 45, 55, 55, 55, 55, 65, 65, 65, 65, 75, 75, 75, 75, 85, 85, 85, 85, 85, 95, 95, 95 ; Posicion y de las paredes nivel 1
-wallsb1 dw 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ; Paredes en pantalla (0 no, 1 celeste claro, 2 celeste oscuro) nivel 1
-wallsa1 dw 56                      ; Cantidad de paredes nivel 1
+wallsx1 dw 035, 035, 055, 035, 035, 035, 035, 035, 035, 035, 035, 035, 035, 035, 035, 045, 055, 065, 075, 085, 095, 105, 115, 125, 135 ; Posicion x de las paredes nivel 1
+wallsy1 dw 005, 015, 025, 035, 045, 055, 065, 075, 085, 095, 105, 115, 125, 135, 145, 005, 005, 005, 005, 005, 005, 005, 005, 005, 005 ; Posicion y de las paredes nivel 1
+wallsb1 dw 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ; Paredes en pantalla (0 no, 1 celeste claro, 2 celeste oscuro) nivel 1
+wallsa1 dw 50                      ; Cantidad de paredes nivel 1
 
-wallsx2 dw 85, 85, 85, 115, 125, 135, 145, 25, 35, 45, 55, 65, 75, 85, 95, 105, 25, 35, 45, 55, 65, 75, 85, 95, 105, 35, 95, 35, 75, 85, 95, 105, 115, 125, 35, 95, 35, 55, 95, 5, 15, 25, 35, 45, 55, 95, 15, 55, 95, 15, 55, 95, 15, 55, 95, 15, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145, 15, 55, 65, 75, 95 ; Posicion x de las paredes nivel 2
-wallsy2 dw 5, 15, 25, 25, 25, 25, 25, 35, 35, 35, 35, 35, 35, 35, 35, 35, 45, 45, 45, 45, 45, 45, 45, 45, 45, 55, 55, 65, 65, 65, 65, 65, 65, 65, 75, 75, 85, 85, 85, 95, 95, 95, 95, 95, 95, 95, 105, 105, 105, 115, 115, 115, 125, 125, 125, 135, 135, 135, 135, 135, 135, 135, 135, 135, 135, 135, 145, 145, 145, 145, 145 ; Posicion y de las paredes nivel 2
-wallsb2 dw 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ; Paredes en pantalla (0 no, 1 celeste claro, 2 celeste oscuro) nivel 2
-wallsa2 dw 142                      ; Cantidad de paredes nivel 2
+wallsx2 dw 035, 035, 035, 035, 035, 035, 035, 055, 035, 035, 035, 035, 035, 035, 035, 045, 055, 065, 075, 085, 095, 105, 115, 125, 135 ; Posicion x de las paredes nivel 2
+wallsy2 dw 005, 015, 025, 035, 045, 055, 065, 075, 085, 095, 105, 115, 125, 135, 145, 005, 005, 005, 005, 005, 005, 005, 005, 005, 005 ; Posicion y de las paredes nivel 2
+wallsb2 dw 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ; Paredes en pantalla (0 no, 1 celeste claro, 2 celeste oscuro) nivel 2
+wallsa2 dw 50                      ; Cantidad de paredes nivel 2
 
 wallsx times 71 dw 00h              ; Posicion x de las paredes
 wallsy times 71 dw 00h              ; Posicion y de las paredes
@@ -337,7 +337,7 @@ deletePlayer:                        ; Funcion encargadad de eliminar el player 
     mov     al, 00h                 ; Mueve el color negro a al
     mov     [playerc], al            ; Guarda el color negro a playerc
     call    drawPlayer               ; Llama a la funcion para dibujar el player
-    mov     al, 0dh                 ; Mueve el color verde a al
+    mov     al, 0eh                 ; Mueve el color verde a al
     mov     [playerc], al            ; Guarda el color verde a playerc
     ret                             ; Retornar
 
