@@ -5,7 +5,6 @@ bits 16                             ; Cantidad de bits a utilizar
     nop                             ; Sin operacion
 
 ; Seccion de Variables
-
 width dw  140h                      ; Ancho de la pantalla 320 p
 height dw  0c8h                     ; Alto de la pantalla 200 p
 gameWidht  dw  8ch                  ; Ancho de la pantall de juego 100 p
@@ -21,66 +20,37 @@ random2 dw 00h                      ; Numero aleatorio 2
 gamePause dw 00h                    ; Indicador de juego en pausa (0 no, 1 si)
 
 
-alienx dw  05h                      ; Posicion x del alien 
-alieny dw  05h                      ; Posicion y del alien
-talienx dw 05h                      ; Posicion temporal x del alien
-talieny dw 05h                      ; Posicion temporal y del alien
-alienv dw  0ah                      ; Velocidad del alien
-alienc dw  02h                      ; Color del alien
-aliens dw  05h                      ; Altura y ancho del alien
-alienm dw  00h                      ; Ultima direccion del alien (0 der, 1 aba, 2 izq, 3 arr)
-
-bulletx dw  05h                     ; Posicion x de la bala
-bullety dw  05h                     ; Posicion y de la bala
-bulletv dw  0ah                     ; Velocidad de la bala
-bulletc dw  0ch                     ; Color de la bala
-bullets dw  05h                     ; Altura y ancho de la bala
-bulletb dw  00h                     ; Bala en pantalla (0 no, 1 si)
-bulletd dw  00h                     ; Direccion de la bala (0 der, 1 aba, 2 izq, 3 arr)
+playerx dw  05h                      ; Posicion x del player 
+playery dw  05h                      ; Posicion y del player
+tPlayerx dw 05h                      ; Posicion temporal x del player
+tPlayery dw 05h                      ; Posicion temporal y del player
+playerv dw  0ah                      ; Velocidad del player
+playerc dw  0dh                      ; Color del player
+players dw  05h                      ; Altura y ancho del player
+playerm dw  00h                      ; Ultima direccion del player (0 der, 1 aba, 2 izq, 3 arr)
 
 bossx dw 41h                        ; Posicion x del jefe
 bossy dw 41h                        ; Posicion y del jefe
 bossc dw 04h                        ; Color del jefe
 bosss dw 05h                        ; Tamano del jefe
 
-flowersc dw 0eh                     ; Color de las flores
-flowerss dw 05h                     ; Altura y ancho de las flores
-flowersi dw 00h                     ; Indice para contar flores
-flowerx dw 00h                      ; Posicion x de la flor actual
-flowery dw 00h                      ; Posicion y de la flor actual
-
-flowersx1 dw 0fh, 19h, 41h, 41h, 73h, 7dh, 87h ; Posicion x de las flores nivel 1
-flowersy1 dw 37h, 73h, 19h, 87h, 7dh, 19h, 41h ; Posicion y de las flores nivel 1
-flowersb1 dw 01h, 01h, 01h, 01h, 01h, 01h, 01h ; Flores en pantalla (0 no, 1 si) nivel 1
-flowersa1 dw 0eh                    ; Cantidad de flores nivel 1
-
-flowersx2 dw 4bh, 69h, 73h, 87h, 87h, 2dh, 05h, 4bh, 69h, 19h, 7dh, 2dh, 4bh, 19h ; Posicion x de las flores nivel 2
-flowersy2 dw 0fh, 0fh, 0fh, 0fh, 23h, 41h, 55h, 5fh, 5fh, 73h, 73h, 7dh, 7dh, 91h ; Posicion y de las flores nivel 2
-flowersb2 dw 01h, 01h, 01h, 01h, 01h, 01h, 01h, 01h, 01h, 01h, 01h, 01h, 01h, 01h ; Flores en pantalla (0 no, 1 si) nivel 2
-flowersa2 dw 1ch                    ; Cantidad de flores nivel 2
-
-flowersx times 14 dw 00h            ; Posicion x de las flores
-flowersy times 14 dw 00h            ; Posicion y de las flores
-flowersb times 14 dw 00h            ; Flores en pantalla (0 no, 1 si)
-flowersa dw 00h                     ; Cantidad de flores
-
 wallsc1 dw 01h                      ; Color 1 de las paredes
 wallsc2 dw 0bh                      ; Color 2 de las paredes
 twallsc dw 00h                      ; Color actual a pintar
-wallss dw 05h                       ; Altura y ancho de las paredes
+wallss dw 07h                       ; Altura y ancho de las paredes
 wallsi dw 00h                       ; Indice para contar las paredes
 wallx dw 00h                        ; Posicion x de la pared actual
 wally dw 00h                        ; Posicion y de la pared actual
 
-wallsx1 dw 37h, 41h, 4bh, 2dh, 37h, 41h, 4bh, 55h, 23h, 2dh, 55h, 5fh, 23h, 2dh, 55h, 5fh, 23h, 2dh, 55h, 5fh, 2dh, 37h, 41h, 4bh, 55h, 37h, 41h, 4bh ; Posicion x de las paredes nivel 1
-wallsy1 dw 23h, 23h, 23h, 2dh, 2dh, 2dh, 2dh, 2dh, 37h, 37h, 37h, 37h, 41h, 41h, 41h, 41h, 4bh, 4bh, 4bh, 4bh, 55h, 55h, 55h, 55h, 55h, 5fh, 5fh, 5fh ; Posicion y de las paredes nivel 1
-wallsb1 dw 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h ; Paredes en pantalla (0 no, 1 celeste claro, 2 celeste oscuro) nivel 1
-wallsa1 dw 38h                      ; Cantidad de paredes nivel 1
+wallsx1 dw 65, 65, 65, 65, 65, 65, 75, 85, 35, 45, 85, 95, 35, 45, 85, 95, 35, 45, 85, 95, 45, 55, 65, 75, 85, 55, 65, 75 ; Posicion x de las paredes nivel 1
+wallsy1 dw 35, 35, 35, 35, 35, 35, 45, 45, 55, 55, 55, 55, 65, 65, 65, 65, 75, 75, 75, 75, 85, 85, 85, 85, 85, 95, 95, 95 ; Posicion y de las paredes nivel 1
+wallsb1 dw 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ; Paredes en pantalla (0 no, 1 celeste claro, 2 celeste oscuro) nivel 1
+wallsa1 dw 56                      ; Cantidad de paredes nivel 1
 
-wallsx2 dw 55h, 55h, 55h, 73h, 7dh, 87h, 91h, 19h, 23h, 2dh, 37h, 41h, 4bh, 55h, 5fh, 69h, 19h, 23h, 2dh, 37h, 41h, 4bh, 55h, 5fh, 69h, 23h, 5fh, 23h, 4bh, 55h, 5fh, 69h, 73h, 7dh, 23h, 5fh, 23h, 37h, 5fh, 05h, 0fh, 19h, 23h, 2dh, 37h, 5fh, 0fh, 37h, 5fh, 0fh, 37h, 5fh, 0fh, 37h, 5fh, 0fh, 37h, 41h, 4bh, 55h, 5fh, 69h, 73h, 7dh, 87h, 91h, 0fh, 37h, 41h, 4bh, 55h ; Posicion x de las paredes nivel 2
-wallsy2 dw 05h, 0fh, 19h, 19h, 19h, 19h, 19h, 23h, 23h, 23h, 23h, 23h, 23h, 23h, 23h, 23h, 2dh, 2dh, 2dh, 2dh, 2dh, 2dh, 2dh, 2dh, 2dh, 37h, 37h, 41h, 41h, 41h, 41h, 41h, 41h, 41h, 4bh, 4bh, 55h, 55h, 55h, 5fh, 5fh, 5fh, 5fh, 5fh, 5fh, 5fh, 69h, 69h, 69h, 73h, 73h, 73h, 7dh, 7dh, 7dh, 87h, 87h, 87h, 87h, 87h, 87h, 87h, 87h, 87h, 87h, 87h, 91h, 91h, 91h, 91h, 91h ; Posicion y de las paredes nivel 2
-wallsb2 dw 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h ; Paredes en pantalla (0 no, 1 celeste claro, 2 celeste oscuro) nivel 2
-wallsa2 dw 8eh                      ; Cantidad de paredes nivel 2
+wallsx2 dw 85, 85, 85, 115, 125, 135, 145, 25, 35, 45, 55, 65, 75, 85, 95, 105, 25, 35, 45, 55, 65, 75, 85, 95, 105, 35, 95, 35, 75, 85, 95, 105, 115, 125, 35, 95, 35, 55, 95, 5, 15, 25, 35, 45, 55, 95, 15, 55, 95, 15, 55, 95, 15, 55, 95, 15, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145, 15, 55, 65, 75, 95 ; Posicion x de las paredes nivel 2
+wallsy2 dw 5, 15, 25, 25, 25, 25, 25, 35, 35, 35, 35, 35, 35, 35, 35, 35, 45, 45, 45, 45, 45, 45, 45, 45, 45, 55, 55, 65, 65, 65, 65, 65, 65, 65, 75, 75, 85, 85, 85, 95, 95, 95, 95, 95, 95, 95, 105, 105, 105, 115, 115, 115, 125, 125, 125, 135, 135, 135, 135, 135, 135, 135, 135, 135, 135, 135, 145, 145, 145, 145, 145 ; Posicion y de las paredes nivel 2
+wallsb2 dw 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ; Paredes en pantalla (0 no, 1 celeste claro, 2 celeste oscuro) nivel 2
+wallsa2 dw 142                      ; Cantidad de paredes nivel 2
 
 wallsx times 71 dw 00h              ; Posicion x de las paredes
 wallsy times 71 dw 00h              ; Posicion y de las paredes
@@ -88,16 +58,6 @@ wallsb times 71 dw 00h              ; Paredes en pantalla (0 no, 1 si)
 wallsa dw 00h                       ; Cantidad de paredes
 
 textColor     dw 09h
-; bombsc dw 07h                       ; Color de las bombas
-; bombss dw 05h                       ; Altura y ancho de las bombas
-; bombsi dw 00h                       ; Indice para contar las bombas
-; bombx dw 00h                        ; Posicion x de la bomba actual
-; bomby dw 00h                        ; Posicion y de la bomba actual
-
-; bombsx times 30 dw 00h              ; Posicion x de las bombas
-; bombsy times 30 dw 00h              ; Posicion y de las bombas
-; bombsb times 30 dw 00h              ; Bombas en pantalla (0 no, 1 si)
-; bombsa dw 00h                       ; Cantidad de bombas
 
 texti dw 00h
 textx dw 00h
@@ -126,11 +86,7 @@ textEnd3 dw '====================================', 0h
 textEnd4 dw '   Presione SPACE para continuar    ', 0h
 
 
-
-
-
 ; Seccion de logica del juego
-
 startProgram:                       ; Funcion de inicio del programa
     call    initializeDisplay       ; Llama a la funcion para inicializar el display
     call    clearScreen             ; Llama a la funcion para limpiar la pantalla
@@ -152,7 +108,7 @@ menuLoop:                           ; Ciclo principal del menu
 
 startGame:                          ; Funcion de inicio del juego
     call    setLevel1               ; Llama a la funcion para colocar los parametros del primer nivel
-    ; call    setLevel1               ; Llama a la funcion para colocar los parametros del primer nivel
+    ; call    setLevel2               ; Llama a la funcion para colocar los parametros del primer nivel
     call    clearScreen             ; Llama a la funcion para limpiar la pantalla
     jmp     gameLoop                ; Salta a la funcion principal del programa
 
@@ -175,11 +131,11 @@ gameLoop:                           ; Ciclo principal del juego
     je      gameLoop                ; Si son iguales vuelve a calcular el ciclo
     mov     [time], dl              ; Sino, almacena el nuevo tiempo
 
-    call    checkPlayerAction       ; Llama a la funcion para mover el alien
+    call    checkPlayerAction       ; Llama a la funcion para mover el player
 
-    call    drawPlayer               ; Llama a la funcion para dibujar al alien
+    call    drawPlayer               ; Llama a la funcion para dibujar al player
     call    drawWalls               ; Llama a la funcion para dibujar las paredes
-    ; call    drawBoss                ; Llama a la funcion para dibujar al jefe
+    call    drawBoss                ; Llama a la funcion para dibujar al jefe
 
     call    drawTextControls        ; Llama a la funcion encargada de escribir texto del juego
 
@@ -214,13 +170,15 @@ setLevel1:                          ; Funcion encargada de iniciar el primer niv
     mov     [level], ax             ; Mueve ax al nivel actual
 
     mov     ax, 05h                 ; Mueve 5 a ax
-    mov     [alienx], ax            ; Mueve el 5 a la posicion inicial x del alien
-    mov     [alieny], ax            ; Mueve el 5 a la posicion inicial y del alien
-    mov     [talienx], ax           ; Mueve el 5 a la posicion inicial temporal x del alien
-    mov     [talieny], ax           ; Mueve el 5 a la posicion inicial temporal y del alien
+    mov     [playerx], ax            ; Mueve el 5 a la posicion inicial x del player
+    mov     ax, 41h
+    mov     [playery], ax            ; Mueve el 5 a la posicion inicial y del player
+    mov     [tPlayerx], ax           ; Mueve el 5 a la posicion inicial temporal x del player
+    mov     [tPlayery], ax           ; Mueve el 5 a la posicion inicial temporal y del player
 
+    mov     ax, 145                 ; Mueve un 145 a ax
+    mov     [bossx], ax             ; Mueve el 145 a la posicion inicial x del jefe
     mov     ax, 41h                 ; Mueve un 65 a ax
-    mov     [bossx], ax             ; Mueve el 65 a la posicion inicial x del jefe
     mov     [bossy], ax             ; Mueve el 65 a la posicion inicial y del jefe
 
     mov     ax, 00h                 ; Mueve 0 a ax
@@ -265,7 +223,7 @@ setLevel1Aux4:
 
 setLevel1Aux5:
     cmp     cx, [wallsa]            ; Compara el contador con la cantidad de paredes
-    je      setLevel1Aux6           ; Si son iguales salta a la funcion auxiliar 6
+    je      exitRoutine             ; Si son iguales termina el ciclo
     mov     bx, wallsb1             ; Mueve el puntero de paredes del nivel 1
     add     bx, cx                  ; Suma cx a bx
     mov     ax, [bx]                ; Mueve la posicion de la pared actual a ax
@@ -275,65 +233,17 @@ setLevel1Aux5:
     add     cx, 2                   ; Suma 2 a cx
     jmp     setLevel1Aux5           ; Salta al inicio de esta funcion
 
-setLevel1Aux6:
-    mov     ax, [flowersa1]         ; Mueve a ax cantidad de flores de nivel 1
-    mov     [flowersa], ax          ; Almacena la cantidad de flores
-    mov     cx, 00h                 ; Mueve 0 a cx
-    jmp     setLevel1Aux7           ; Salta a la funcion auxiliar 7
-
-setLevel1Aux7:
-    cmp     cx, [flowersa]          ; Compara el contador con la cantidad de flores
-    je      setLevel1Aux8           ; Si son iguales salta a la funcion auxiliar 8
-    mov     bx, flowersx1           ; Mueve el puntero de posiciones x de flores del nivel 1
-    add     bx, cx                  ; Suma cx a bx
-    mov     ax, [bx]                ; Mueve la posicion de la flor actual a ax
-    mov     bx, flowersx            ; Mueve el puntero de posiciones x de flores
-    add     bx, cx                  ; Suma cx a bx
-    mov     [bx], ax                ; Almacena ax en el puntero de bx
-    add     cx, 2                   ; Suma 2 a cx
-    jmp     setLevel1Aux7           ; Salta al inicio de esta funcion
-
-setLevel1Aux8:
-    mov     cx, 00h                 ; Mueve 0 a cx
-    jmp     setLevel1Aux9           ; Salta a la funcion auxiliar 9
-
-setLevel1Aux9:
-    cmp     cx, [flowersa]          ; Compara el contador con la cantidad de flores
-    je      setLevel1Aux10          ; Si son iguales salta a la funcion auxiliar 10
-    mov     bx, flowersy1           ; Mueve el puntero de posiciones y de flores del nivel 1
-    add     bx, cx                  ; Suma cx a bx
-    mov     ax, [bx]                ; Mueve la posicion de la flor actual a ax
-    mov     bx, flowersy            ; Mueve el puntero de posiciones y de flores
-    add     bx, cx                  ; Suma cx a bx
-    mov     [bx], ax                ; Almacena ax en el puntero de bx
-    add     cx, 2                   ; Suma 2 a cx
-    jmp     setLevel1Aux9           ; Salta al inicio de esta funcion
-
-setLevel1Aux10:
-    mov     cx, 00h                 ; Mueve 0 a cx
-    jmp     setLevel1Aux11          ; Salta a la funcion auxiliar 11
-
-setLevel1Aux11:
-    cmp     cx, [flowersa]          ; Compara el contador con la cantidad de flores
-    je      exitRoutine             ; Si son iguales salta a la funcion de salida
-    mov     bx, flowersb1           ; Mueve el puntero de flores del nivel 1
-    add     bx, cx                  ; Suma cx a bx
-    mov     ax, [bx]                ; Mueve la posicion de la flor actual a ax
-    mov     bx, flowersb            ; Mueve el puntero de posiciones de flores
-    add     bx, cx                  ; Suma cx a bx
-    mov     [bx], ax                ; Almacena ax en el puntero de bx
-    add     cx, 2                   ; Suma 2 a cx
-    jmp     setLevel1Aux11          ; Salta al inicio de esta funcion
 
 setLevel2:                          ; Funcion encargada de iniciar el segundo nivel del juego
     mov     ax, 02h                 ; Mueve 2 a ax
     mov     [level], ax             ; Mueve ax al nivel actual
 
     mov     ax, 05h                 ; Mueve 5 a ax
-    mov     [alienx], ax            ; Mueve el 5 a la posicion inicial x del alien
-    mov     [alieny], ax            ; Mueve el 5 a la posicion inicial y del alien
-    mov     [talienx], ax           ; Mueve el 5 a la posicion inicial temporal x del alien
-    mov     [talieny], ax           ; Mueve el 5 a la posicion inicial temporal y del alien
+    mov     [playerx], ax            ; Mueve el 5 a la posicion inicial x del player
+    mov     ax, 41h
+    mov     [playery], ax            ; Mueve el 5 a la posicion inicial y del player
+    mov     [tPlayerx], ax           ; Mueve el 5 a la posicion inicial temporal x del player
+    mov     [tPlayery], ax           ; Mueve el 5 a la posicion inicial temporal y del player
 
     mov     ax, 91h                 ; Mueve un 145 a ax
     mov     [bossx], ax             ; Mueve el 145 a la posicion inicial x del jefe
@@ -381,7 +291,7 @@ setLevel2Aux4:
 
 setLevel2Aux5:
     cmp     cx, [wallsa]            ; Compara el contador con la cantidad de paredes
-    je      setLevel2Aux6           ; Si son iguales salta a la funcion auxiliar 6
+    je      exitRoutine           ; Si son iguales salta a la funcion auxiliar 6
     mov     bx, wallsb2             ; Mueve el puntero de paredes del nivel 2
     add     bx, cx                  ; Suma cx a bx
     mov     ax, [bx]                ; Mueve la posicion de la pared actual a ax
@@ -391,55 +301,6 @@ setLevel2Aux5:
     add     cx, 2                   ; Suma 2 a cx
     jmp     setLevel2Aux5           ; Salta al inicio de esta funcion
 
-setLevel2Aux6:
-    mov     ax, [flowersa2]         ; Mueve a ax cantidad de flores de nivel 2
-    mov     [flowersa], ax          ; Almacena la cantidad de flores
-    mov     cx, 00h                 ; Mueve 0 a cx
-    jmp     setLevel2Aux7           ; Salta a la funcion auxiliar 7
-
-setLevel2Aux7:
-    cmp     cx, [flowersa]          ; Compara el contador con la cantidad de flores
-    je      setLevel2Aux8           ; Si son iguales salta a la funcion auxiliar 8
-    mov     bx, flowersx2           ; Mueve el puntero de posiciones x de flores del nivel 2
-    add     bx, cx                  ; Suma cx a bx
-    mov     ax, [bx]                ; Mueve la posicion de la flor actual a ax
-    mov     bx, flowersx            ; Mueve el puntero de posiciones x de flores
-    add     bx, cx                  ; Suma cx a bx
-    mov     [bx], ax                ; Almacena ax en el puntero de bx
-    add     cx, 2                   ; Suma 2 a cx
-    jmp     setLevel2Aux7           ; Salta al inicio de esta funcion
-
-setLevel2Aux8:
-    mov     cx, 00h                 ; Mueve 0 a cx
-    jmp     setLevel2Aux9           ; Salta a la funcion auxiliar 9
-
-setLevel2Aux9:
-    cmp     cx, [flowersa]          ; Compara el contador con la cantidad de flores
-    je      setLevel2Aux10          ; Si son iguales salta a la funcion auxiliar 10
-    mov     bx, flowersy2           ; Mueve el puntero de posiciones y de flores del nivel 2
-    add     bx, cx                  ; Suma cx a bx
-    mov     ax, [bx]                ; Mueve la posicion de la flor actual a ax
-    mov     bx, flowersy            ; Mueve el puntero de posiciones y de flores
-    add     bx, cx                  ; Suma cx a bx
-    mov     [bx], ax                ; Almacena ax en el puntero de bx
-    add     cx, 2                   ; Suma 2 a cx
-    jmp     setLevel2Aux9           ; Salta al inicio de esta funcion
-
-setLevel2Aux10:
-    mov     cx, 00h                 ; Mueve 0 a cx
-    jmp     setLevel2Aux11          ; Salta a la funcion auxiliar 11
-
-setLevel2Aux11:
-    cmp     cx, [flowersa]          ; Compara el contador con la cantidad de flores
-    je      exitRoutine             ; Si son iguales salta a la funcion de salida
-    mov     bx, flowersb2           ; Mueve el puntero de flores del nivel 2
-    add     bx, cx                  ; Suma cx a bx
-    mov     ax, [bx]                ; Mueve la posicion de la flor actual a ax
-    mov     bx, flowersb            ; Mueve el puntero de posiciones de flores
-    add     bx, cx                  ; Suma cx a bx
-    mov     [bx], ax                ; Almacena ax en el puntero de bx
-    add     cx, 2                   ; Suma 2 a cx
-    jmp     setLevel2Aux11          ; Salta al inicio de esta funcion
 
 generateRandomNumber:               ; Funcion encargada de generar un numero
     mov     ah, 00h                 ; Activa obtener el tiempo de la computadora
@@ -450,7 +311,6 @@ generateRandomNumber:               ; Funcion encargada de generar un numero
     ret                             ; Retornar
 
 ;  Seccion de dibujo en pantalla
-
 clearScreen:                        ; Funcion encargada de limpiar la pantala
     mov     cx, 00h                 ; Posicion inicial x
     mov     dx, 00h                 ; Posicion inicial y
@@ -473,41 +333,39 @@ clearScreenAux2:
     jng     clearScreenAux          ; Si dx no es mayor que el ancho de la pantalla, salta a dibujar la siguiente fila
     ret                             ; Sino, Retornar
 
-deletePlayer:                        ; Funcion encargadad de eliminar el alien en pantalla
+deletePlayer:                        ; Funcion encargadad de eliminar el player en pantalla
     mov     al, 00h                 ; Mueve el color negro a al
-    mov     [alienc], al            ; Guarda el color negro a alienc
-    call    drawPlayer               ; Llama a la funcion para dibujar el alien
-    mov     al, 02h                 ; Mueve el color verde a al
-    mov     [alienc], al            ; Guarda el color verde a alienc
+    mov     [playerc], al            ; Guarda el color negro a playerc
+    call    drawPlayer               ; Llama a la funcion para dibujar el player
+    mov     al, 0dh                 ; Mueve el color verde a al
+    mov     [playerc], al            ; Guarda el color verde a playerc
     ret                             ; Retornar
 
-drawPlayer:                          ; Funcion encargada de dibujar el alien
-    mov     cx, [alienx]            ; Posicion inicial x del alien
-    mov     dx, [alieny]            ; Posicion inicial y del alien
+drawPlayer:                          ; Funcion encargada de dibujar el player
+    mov     cx, [playerx]            ; Posicion inicial x del player
+    mov     dx, [playery]            ; Posicion inicial y del player
     jmp     drawPlayerAux            ; Salta a la funcion auxliar
 
 drawPlayerAux:
     mov     ah, 0ch                 ; Dibuja pixel
-    mov     al, [alienc]            ; Color verde
+    mov     al, [playerc]            ; Color verde
     mov     bh, 00h                 ; Pagina
     int     10h                     ; Ejecutar interrupcion
     inc     cx                      ; Suma uno a cx
     mov     ax, cx                  ; Mueve cx a ax
-    sub     ax, [alienx]            ; Resta el ancho del alien a la columna actual
-    cmp     ax, [aliens]            ; Compara resultado de la resta con el ancho
-    jng     drawPlayerAux            ; Si ax no es mayor que el ancho del alien, salta a dibujar en la siguiente columna
+    sub     ax, [playerx]            ; Resta el ancho del player a la columna actual
+    cmp     ax, [players]            ; Compara resultado de la resta con el ancho
+    jng     drawPlayerAux            ; Si ax no es mayor que el ancho del player, salta a dibujar en la siguiente columna
     jmp     drawPlayerAux2           ; Sino, salta a la funcion auxiliar 2
 
 drawPlayerAux2:                  
-    mov     cx, [alienx]            ; Reinicia las columnas
+    mov     cx, [playerx]            ; Reinicia las columnas
     inc     dx                      ; Suma uno a dx
     mov     ax, dx                  ; Mueve dx a ax
-    sub     ax, [alieny]            ; Resta el alto del alien a la fila actual
-    cmp     ax, [aliens]            ; Compara resultado de la resta con la altura
-    jng     drawPlayerAux            ; Si ax no es mayor que el ancho del alien, salta a dibujar la siguiente fila
+    sub     ax, [playery]            ; Resta el alto del player a la fila actual
+    cmp     ax, [players]            ; Compara resultado de la resta con la altura
+    jng     drawPlayerAux            ; Si ax no es mayor que el ancho del player, salta a dibujar la siguiente fila
     ret                             ; Sino, Retornar
-
-
 
 drawBoss:                           ; Funcion encargada de dibujar al jefe
     mov     cx, [bossx]             ; Posicion inicial x del jefe
@@ -534,7 +392,6 @@ drawBossAux2:
     cmp     ax, [bosss]             ; Compara resultado de la resta con la altura
     jng     drawBossAux             ; Si ax no es mayor que el ancho del jefe, salta a dibujar la siguiente fila
     ret                             ; Sino, Retornar
-
 
 drawWalls:                          ; Funcion encargada de dibujar las paredes
     mov     cx, [wallsi]            ; Mueve el contador de las paredes a cx
@@ -742,8 +599,6 @@ drawTextLevel2:                     ; Funcion encargada de escribir el texto del
 
     ret                             ; Retornar
 
-
-
 drawText:                           ; Funcion encargada de dibujar texto
     cmp     byte [bx],0             ; Compara el byte que contiene bx con 0
     jz      finishDraw              ; Si es igual a cero, salta a la funcion de salida
@@ -773,7 +628,6 @@ finishDraw:                         ; Funcion de salida de texto
     ret                             ; Retornar
 
 ; Seccion de lectura del teclado
-
 checkPlayerAction:                  ; Funcion encargada de verificar si el juego esta en pausa
     mov     ax, 00h                 ; Mueve un 0 a ax
     cmp     ax, [gamePause]         ; Verifica si la variable de pausa es 0
@@ -790,16 +644,16 @@ makeMovements:                      ; Funcion encargada de realizar movimientos 
     int     16h                     ; Ejecutar interrupcion
 
     cmp     ah, 48h                 ; Si la tecla presionada es la Flecha Arriba
-    je      movePlayerUp             ; Salta a mover el alien hacia arriba
+    je      movePlayerUp             ; Salta a mover el player hacia arriba
     
     cmp     ah, 50h                 ; Si la tecla presionada es la Flecha Abajo
-    je      movePlayerDown           ; Salta a mover el alien hacia abajo
+    je      movePlayerDown           ; Salta a mover el player hacia abajo
 
     cmp     ah, 4dh                 ; Si la tecla presionada es la Flecha Derecha
-    je      movePlayerRight          ; Salta a mover el alien hacia la derecha
+    je      movePlayerRight          ; Salta a mover el player hacia la derecha
 
     cmp     ah, 4bh                 ; Si la tecla presionada es la Flecha Izquierda
-    je      movePlayerLeft           ; Salta a mover el alien hacia la izquierda
+    je      movePlayerLeft           ; Salta a mover el player hacia la izquierda
 
     cmp     ah, 26h                 ; Si la tecla presionada es l
     je      pauseGame               ; Pausa el juego
@@ -868,7 +722,7 @@ unPauseGame:                        ; Funcion encargada de quitar la pausa del j
     ret                             ; Retornar
 
 resetGame:                          ; Funcion encargada de reiniciar el juego
-    call    clearScreen             ; Llama a la funcion encargada de eliminar el alien
+    call    clearScreen             ; Llama a la funcion encargada de eliminar el player
     call    setLevel1               ; Llama a la funcion encargada de setear los parametros del primer nivel
     jmp     gameLoop                ; Salta a la funcion de juego principal
 
@@ -876,109 +730,108 @@ exitRoutine:                        ; Funcion encargada de retornar
     ret                             ; Retornar
 
 ; Seccion de movimiento, logica y colisiones
-
-movePlayerUp:                        ; Funcion encargada de mover el alien hacia arriba
+movePlayerUp:                        ; Funcion encargada de mover el player hacia arriba
     mov     ax, 05h                 ; Mueve 5 a ax
-    cmp     [alieny], ax            ; Compara la posicion y del alien con ax
+    cmp     [playery], ax            ; Compara la posicion y del player con ax
     je      exitRoutine             ; Si son iguales, salta a la funcion de salida
 
-    call    deletePlayer             ; Llama a la funcion encargada de eliminar el alien
+    call    deletePlayer             ; Llama a la funcion encargada de eliminar el player
 
-    mov     ax, [alieny]            ; Mueve la posicion y del alien a ax
-    sub     ax, [alienv]            ; Resta la velocidad del alien a ax
-    mov     [talieny], ax           ; Almacena la nueva posicion en una variable temporal
-    call    checkPlayerColision      ; Llama a la funcion para detectar colisiones del alien
+    mov     ax, [playery]            ; Mueve la posicion y del player a ax
+    sub     ax, [playerv]            ; Resta la velocidad del player a ax
+    mov     [tPlayery], ax           ; Almacena la nueva posicion en una variable temporal
+    call    checkPlayerColision      ; Llama a la funcion para detectar colisiones del player
 
     cmp     ax, 00h                 ; Verifica si ax es 0
     je      exitPlayerMovement       ; En caso de serlo, significa que la nueva posicion es invalida, y salta a la funcion de salida
 
-    mov     [alieny], ax            ; Sino, almacena ax en la posicion y del alien
+    mov     [playery], ax            ; Sino, almacena ax en la posicion y del player
     
     mov     ax, 03h                 ; Mueve 3 a ax
-    mov     [alienm], ax            ; Almacena ax a la ultima direccion del alien
+    mov     [playerm], ax            ; Almacena ax a la ultima direccion del player
 
     ret                             ; Retornar
 
-movePlayerDown:                      ; Funcion encargada de mover el alien hacia abajo
+movePlayerDown:                      ; Funcion encargada de mover el player hacia abajo
     mov     ax, [gameHeight]        ; Mueve el alto del juego a ax
     add     ax, 05h                 ; Suma 5 a ax
-    cmp     [alieny], ax            ; Compara la posicion y del alien con el alto del juego
+    cmp     [playery], ax            ; Compara la posicion y del player con el alto del juego
     je      exitRoutine             ; Si son iguales, salta a la funcion de salida
 
-    call    deletePlayer             ; Llama a la funcion encargada de eliminar el alien
+    call    deletePlayer             ; Llama a la funcion encargada de eliminar el player
 
-    mov     ax, [alieny]            ; Mueve la posicion y del alien a ax
-    add     ax, [alienv]            ; Suma la velocidad del alien a ax
-    mov     [talieny], ax           ; Almacena la nueva posicion en una variable temporal
-    call    checkPlayerColision      ; Llama a la funcion para detectar colisiones del alien
+    mov     ax, [playery]            ; Mueve la posicion y del player a ax
+    add     ax, [playerv]            ; Suma la velocidad del player a ax
+    mov     [tPlayery], ax           ; Almacena la nueva posicion en una variable temporal
+    call    checkPlayerColision      ; Llama a la funcion para detectar colisiones del player
 
     cmp     ax, 00h                 ; Verifica si ax es 0
     je      exitPlayerMovement       ; En caso de serlo, significa que la nueva posicion es invalida, y salta a la funcion de salida
 
-    mov     [alieny], ax            ; Sino, almacena ax en la posicion y del alien
+    mov     [playery], ax            ; Sino, almacena ax en la posicion y del player
 
     mov     ax, 01h                 ; Mueve 1 a ax
-    mov     [alienm], ax            ; Almacena ax a la ultima direccion del alien
+    mov     [playerm], ax            ; Almacena ax a la ultima direccion del player
 
     ret                             ; Retornar
 
-movePlayerRight:                     ; Funcion encargada de mover el alien hacia la derecha
+movePlayerRight:                     ; Funcion encargada de mover el player hacia la derecha
     mov     ax, [gameWidht]         ; Mueve el ancho del juego a ax
     add     ax, 05h                 ; Suma 5 a ax
-    cmp     [alienx], ax            ; Compara la posicion x del alien con el ancho del juego
+    cmp     [playerx], ax            ; Compara la posicion x del player con el ancho del juego
     je      exitRoutine             ; Si son iguales, salta a la funcion de salida
 
-    call    deletePlayer             ; Llama a la funcion encargada de eliminar el alien
+    call    deletePlayer             ; Llama a la funcion encargada de eliminar el player
 
-    mov     ax, [alienx]            ; Mueve la posicion x del alien a ax
-    add     ax, [alienv]            ; Suma la velocidad del alien a ax
-    mov     [talienx], ax           ; Almacena la nueva posicion en una variable temporal
-    call    checkPlayerColision      ; Llama a la funcion para detectar colisiones del alien
+    mov     ax, [playerx]            ; Mueve la posicion x del player a ax
+    add     ax, [playerv]            ; Suma la velocidad del player a ax
+    mov     [tPlayerx], ax           ; Almacena la nueva posicion en una variable temporal
+    call    checkPlayerColision      ; Llama a la funcion para detectar colisiones del player
 
     cmp     ax, 00h                 ; Verifica si ax es 0
     je      exitPlayerMovement       ; En caso de serlo, significa que la nueva posicion es invalida, y salta a la funcion de salida
 
-    mov     [alienx], ax            ; Sino, almacena ax en la posicion x del alien
+    mov     [playerx], ax            ; Sino, almacena ax en la posicion x del player
 
     mov     ax, 00h                 ; Mueve 0 a ax
-    mov     [alienm], ax            ; Almacena ax a la ultima direccion del alien
+    mov     [playerm], ax            ; Almacena ax a la ultima direccion del player
 
     ret                             ; Retornar
 
-movePlayerLeft:                      ; Funcion encargada de mover el alien hacia la izquierda
+movePlayerLeft:                      ; Funcion encargada de mover el player hacia la izquierda
     mov     ax, 05h                 ; Mueve 5 a ax
-    cmp     [alienx], ax            ; Compara la posicion x del alien con ax
+    cmp     [playerx], ax            ; Compara la posicion x del player con ax
     je      exitRoutine             ; Si son iguales, salta a la funcion de salida
 
-    call    deletePlayer             ; Llama a la funcion encargada de eliminar el alien
+    call    deletePlayer             ; Llama a la funcion encargada de eliminar el player
 
-    mov     ax, [alienx]            ; Mueve la posicion x del alien a ax
-    sub     ax, [alienv]            ; Resta la velocidad del alien a ax
-    mov     [talienx], ax           ; Almacena la nueva posicion en una variable temporal
-    call    checkPlayerColision      ; Llama a la funcion para detectar colisiones del alien
+    mov     ax, [playerx]            ; Mueve la posicion x del player a ax
+    sub     ax, [playerv]            ; Resta la velocidad del player a ax
+    mov     [tPlayerx], ax           ; Almacena la nueva posicion en una variable temporal
+    call    checkPlayerColision      ; Llama a la funcion para detectar colisiones del player
 
     cmp     ax, 00h                 ; Verifica si ax es 0
     je      exitPlayerMovement       ; En caso de serlo, significa que la nueva posicion es invalida, y salta a la funcion de salida
 
-    mov     [alienx], ax            ; Sino, almacena ax en la posicion x del alien
+    mov     [playerx], ax            ; Sino, almacena ax en la posicion x del player
 
     mov     ax, 02h                 ; Mueve 2 a ax
-    mov     [alienm], ax            ; Almacena ax a la ultima direccion del alien
+    mov     [playerm], ax            ; Almacena ax a la ultima direccion del player
 
     ret                             ; Retornar
 
 exitPlayerMovement:
-    mov     ax, [alienx]            ; Mueve la posicion x del alien a ax
-    mov     [talienx], ax           ; Almacena ax a la posicion temporal x del alien
-    mov     ax, [alieny]            ; Mueve la posicion y del alien a ax
-    mov     [talieny], ax           ; Almacena ax a la posicion temporal y del alien
+    mov     ax, [playerx]            ; Mueve la posicion x del player a ax
+    mov     [tPlayerx], ax           ; Almacena ax a la posicion temporal x del player
+    mov     ax, [playery]            ; Mueve la posicion y del player a ax
+    mov     [tPlayery], ax           ; Almacena ax a la posicion temporal y del player
 
     ret                             ; Retornar
 
-checkPlayerColision:                 ; Funcion encargada de verificar las colisiones del alien
+checkPlayerColision:                 ; Funcion encargada de verificar las colisiones del player
     push    ax                      ; Almacena ax en el stack
-    mov     cx, [talienx]           ; Mueve la posicion temporal del alien x
-    mov     dx, [talieny]           ; Mueve la posicion temporal del alien y
+    mov     cx, [tPlayerx]           ; Mueve la posicion temporal del player x
+    mov     dx, [tPlayery]           ; Mueve la posicion temporal del player y
     mov     ah, 0dh                 ; Lee pixel
     mov     bh, 00h                 ; Pagina
     int     10h                     ; Ejecutar interrupcion
@@ -987,12 +840,14 @@ checkPlayerColision:                 ; Funcion encargada de verificar las colisi
     je      checkPlayerWallColision  ; En caso de que se cumpla, salta a la funcion de colision de paredes
     cmp     al, [wallsc2]           ; Compara el pixel leido con el color 2 de la pared
     je      checkPlayerWallColision  ; En caso de que se cumpla, salta a la funcion de colision de paredes
+    cmp     al, [bossc]             ; Compara el pixel leido con el color del jefe
+    je      advanceGame               ; En caso de que se cumpla, reinica el juego
 
     pop     ax                      ; Restaura ax del stack
     ret                             ; Retornar
 
 
-checkPlayerWallColision:             ; Funcion encargada de verificar colisiones del alien con las paredes
+checkPlayerWallColision:             ; Funcion encargada de verificar colisiones del player con las paredes
     pop     ax                      ; Restaura ax del stack
     jmp     checkPlayerWallColisionAux ; Salta a la funcion auxiliar
 
@@ -1003,7 +858,7 @@ checkPlayerWallColisionAux:
     add     bx, cx                  ; Suma el contador al puntero de posiciones x
     mov     dx, [bx]                ; Mueve a dx la posicion x de la pared
 
-    cmp     dx, [talienx]           ; Compara la posicion x de la pared con la del alien
+    cmp     dx, [tPlayerx]           ; Compara la posicion x de la pared con la del player
     je      checkPlayerWallColisionAux2 ; Salta a la funcion auxiliar 2
     jmp     checkPlayerWallColisionAux4 ; Salta a la funcion auxiliar 4
 
@@ -1014,7 +869,7 @@ checkPlayerWallColisionAux2:
     add     bx, cx                  ; Suma el contador al puntero de posiciones y
     mov     dx, [bx]                ; Mueve a dx la posicion x de la pared
 
-    cmp     dx, [talieny]           ; Compara la posicion y de la pared con la del alien
+    cmp     dx, [tPlayery]           ; Compara la posicion y de la pared con la del player
     je      checkPlayerWallColisionAux3 ; Salta a la funcion auxiliar 3
     jmp     checkPlayerWallColisionAux4 ; Salta a la funcion auxiliar 4
 
