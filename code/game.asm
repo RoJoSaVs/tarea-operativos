@@ -42,15 +42,15 @@ wallsi dw 00h                       ; Indice para contar las paredes
 wallx dw 00h                        ; Posicion x de la pared actual
 wally dw 00h                        ; Posicion y de la pared actual
 
-wallsx1 dw 035, 035, 055, 035, 035, 035, 035, 035, 035, 035, 035, 035, 035, 035, 035, 045, 055, 065, 075, 085, 095, 105, 115, 125, 135 ; Posicion x de las paredes nivel 1
-wallsy1 dw 005, 015, 025, 035, 045, 055, 065, 075, 085, 095, 105, 115, 125, 135, 145, 005, 005, 005, 005, 005, 005, 005, 005, 005, 005 ; Posicion y de las paredes nivel 1
-wallsb1 dw 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ; Paredes en pantalla (0 no, 1 celeste claro, 2 celeste oscuro) nivel 1
-wallsa1 dw 50                      ; Cantidad de paredes nivel 1
+wallsx1 dw 035, 035, 035, 035, 035, 035, 035, 035, 035, 035, 035, 035, 045, 045, 055, 065, 065, 065, 065, 065, 065, 065, 065, 065, 065, 065, 065, 075, 075, 085, 085, 085, 085, 095, 095, 095, 095, 095, 095, 105, 105, 105, 105, 105, 105, 105, 105, 115, 115, 115, 115, 115, 125, 125, 135, 135, 135, 135, 135, 135, 135, 135, 135, 135, 135, 135, 135, 135, 145, 145
+wallsy1 dw 005, 015, 025, 035, 045, 055, 095, 105, 115, 125, 135, 145, 015, 145, 015, 015, 035, 045, 055, 065, 075, 085, 095, 105, 115, 125, 135, 015, 135, 095, 105, 115, 135, 025, 055, 065, 075, 085, 135, 025, 055, 085, 095, 105, 115, 125, 135, 025, 035, 045, 055, 085, 085, 105, 005, 015, 025, 035, 045, 055, 075, 085, 095, 105, 115, 125, 135, 145, 055, 075
+wallsb1 times 140 dw 1; Paredes en pantalla (0 no, 1 celeste claro, 2 celeste oscuro) nivel 1
+wallsa1 dw 140                      ; Cantidad de paredes nivel 1
 
-wallsx2 dw 035, 035, 035, 035, 035, 035, 035, 055, 035, 035, 035, 035, 035, 035, 035, 045, 055, 065, 075, 085, 095, 105, 115, 125, 135 ; Posicion x de las paredes nivel 2
-wallsy2 dw 005, 015, 025, 035, 045, 055, 065, 075, 085, 095, 105, 115, 125, 135, 145, 005, 005, 005, 005, 005, 005, 005, 005, 005, 005 ; Posicion y de las paredes nivel 2
-wallsb2 dw 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ; Paredes en pantalla (0 no, 1 celeste claro, 2 celeste oscuro) nivel 2
-wallsa2 dw 50                      ; Cantidad de paredes nivel 2
+wallsx2 dw 035, 035, 035, 035, 035, 035, 035, 055, 035, 035, 035, 035, 035, 035, 035, 045, 045, 055, 055, 055, 055, 055, 055, 055, 065, 065, 065, 075, 075, 075, 075, 075, 075, 075, 075, 085, 085, 095, 095, 095, 095, 095, 095, 095, 095, 095, 095, 105, 105, 115, 115, 115, 115, 115, 115, 115, 115, 115, 125, 125, 125, 135, 135, 135, 135, 135, 135, 135, 135, 135, 145 ; Posicion x de las paredes nivel 2
+wallsy2 dw 005, 015, 025, 035, 045, 055, 065, 075, 085, 095, 105, 115, 125, 135, 145, 035, 115, 015, 035, 055, 065, 075, 115, 135, 015, 085, 135, 025, 035, 065, 075, 095, 105, 115, 135, 045, 135, 005, 015, 025, 055, 075, 085, 095, 115, 125, 145, 045, 105, 015, 035, 055, 065, 075, 085, 095, 115, 135, 015, 085, 135, 025, 035, 045, 055, 065, 075, 095, 115, 135, 125 ; Posicion y de las paredes nivel 2
+wallsb2 times 142 dw 2; Paredes en pantalla (0 no, 1 celeste claro, 2 celeste oscuro) nivel 2
+wallsa2 dw 142                      ; Cantidad de paredes nivel 2
 
 wallsx times 71 dw 00h              ; Posicion x de las paredes
 wallsy times 71 dw 00h              ; Posicion y de las paredes
@@ -108,7 +108,6 @@ menuLoop:                           ; Ciclo principal del menu
 
 startGame:                          ; Funcion de inicio del juego
     call    setLevel1               ; Llama a la funcion para colocar los parametros del primer nivel
-    ; call    setLevel2               ; Llama a la funcion para colocar los parametros del primer nivel
     call    clearScreen             ; Llama a la funcion para limpiar la pantalla
     jmp     gameLoop                ; Salta a la funcion principal del programa
 
