@@ -1,5 +1,5 @@
 org 0x8000                          ; Posicion de memoria inicial del kernel
-bits 16                             ; Cantidad de bits a utilizar
+bits 16                             ; Cantidad de bits
 
     jmp startProgram                ; Salta al inicio del programa
     nop                             ; Sin operacion
@@ -29,10 +29,10 @@ playerc dw  0eh                      ; Color del player
 players dw  05h                      ; Altura y ancho del player
 playerm dw  00h                      ; Ultima direccion del player (0 der, 1 aba, 2 izq, 3 arr)
 
-bossx dw 41h                        ; Posicion x del jefe
-bossy dw 41h                        ; Posicion y del jefe
-bossc dw 04h                        ; Color del jefe
-bosss dw 05h                        ; Tamano del jefe
+endx dw 41h                        ; Posicion x de la salida
+endy dw 41h                        ; Posicion y de la salida
+endc dw 04h                        ; Color de la salida
+ends dw 05h                        ; Tamano de la salida
 
 wallsc1 dw 01h                      ; Color 1 de las paredes
 wallsc2 dw 0bh                      ; Color 2 de las paredes
@@ -134,7 +134,7 @@ gameLoop:                           ; Ciclo principal del juego
 
     call    drawPlayer               ; Llama a la funcion para dibujar al player
     call    drawWalls               ; Llama a la funcion para dibujar las paredes
-    call    drawBoss                ; Llama a la funcion para dibujar al jefe
+    call    drawEnd                ; Llama a la funcion para dibujar al jefe
 
     call    drawTextControls        ; Llama a la funcion encargada de escribir texto del juego
 
@@ -176,9 +176,9 @@ setLevel1:                          ; Funcion encargada de iniciar el primer niv
     mov     [tPlayery], ax           ; Mueve el 5 a la posicion inicial temporal y del player
 
     mov     ax, 145                 ; Mueve un 145 a ax
-    mov     [bossx], ax             ; Mueve el 145 a la posicion inicial x del jefe
+    mov     [endx], ax             ; Mueve el 145 a la posicion inicial x de la salida
     mov     ax, 41h                 ; Mueve un 65 a ax
-    mov     [bossy], ax             ; Mueve el 65 a la posicion inicial y del jefe
+    mov     [endy], ax             ; Mueve el 65 a la posicion inicial y de la salida
 
     mov     ax, 00h                 ; Mueve 0 a ax
     mov     [gamePause], ax         ; Mueve el contenido de ax a la variable de pausa
@@ -245,8 +245,8 @@ setLevel2:                          ; Funcion encargada de iniciar el segundo ni
     mov     [tPlayery], ax           ; Mueve el 5 a la posicion inicial temporal y del player
 
     mov     ax, 91h                 ; Mueve un 145 a ax
-    mov     [bossx], ax             ; Mueve el 145 a la posicion inicial x del jefe
-    mov     [bossy], ax             ; Mueve el 145 a la posicion inicial y del jefe
+    mov     [endx], ax             ; Mueve el 145 a la posicion inicial x de la salida
+    mov     [endy], ax             ; Mueve el 145 a la posicion inicial y de la salida
 
     mov     ax, 00h                 ; Mueve 0 a ax
     mov     [gamePause], ax         ; Mueve el contenido de ax a la variable de pausa
@@ -366,30 +366,30 @@ drawPlayerAux2:
     jng     drawPlayerAux            ; Si ax no es mayor que el ancho del player, salta a dibujar la siguiente fila
     ret                             ; Sino, Retornar
 
-drawBoss:                           ; Funcion encargada de dibujar al jefe
-    mov     cx, [bossx]             ; Posicion inicial x del jefe
-    mov     dx, [bossy]             ; Posicion inicial y del jefe
-    jmp     drawBossAux             ; Salta a la funcion auxliar
+drawEnd:                           ; Funcion encargada de dibujar al jefe
+    mov     cx, [endx]             ; Posicion inicial x de la salida
+    mov     dx, [endy]             ; Posicion inicial y de la salida
+    jmp     drawEndAux             ; Salta a la funcion auxliar
 
-drawBossAux:
+drawEndAux:
     mov     ah, 0ch                 ; Dibuja pixel
-    mov     al, [bossc]             ; Color rojo
+    mov     al, [endc]             ; Color rojo
     mov     bh, 00h                 ; Pagina
     int     10h                     ; Ejecutar interrupcion
     inc     cx                      ; Suma uno a cx
     mov     ax, cx                  ; Mueve cx a ax
-    sub     ax, [bossx]             ; Resta el ancho del jefe a la columna actual
-    cmp     ax, [bosss]             ; Compara resultado de la resta con el ancho
-    jng     drawBossAux             ; Si ax no es mayor que el ancho del jefe, salta a dibujar en la siguiente columna
-    jmp     drawBossAux2            ; Sino, salta a la funcion auxiliar 2
+    sub     ax, [endx]             ; Resta el ancho de la salida a la columna actual
+    cmp     ax, [ends]             ; Compara resultado de la resta con el ancho
+    jng     drawEndAux             ; Si ax no es mayor que el ancho de la salida, salta a dibujar en la siguiente columna
+    jmp     drawEndAux2            ; Sino, salta a la funcion auxiliar 2
 
-drawBossAux2:                  
-    mov     cx, [bossx]             ; Reinicia las columnas
+drawEndAux2:                  
+    mov     cx, [endx]             ; Reinicia las columnas
     inc     dx                      ; Suma uno a dx
     mov     ax, dx                  ; Mueve dx a ax
-    sub     ax, [bossy]             ; Resta el alto del jefe a la fila actual
-    cmp     ax, [bosss]             ; Compara resultado de la resta con la altura
-    jng     drawBossAux             ; Si ax no es mayor que el ancho del jefe, salta a dibujar la siguiente fila
+    sub     ax, [endy]             ; Resta el alto de la salida a la fila actual
+    cmp     ax, [ends]             ; Compara resultado de la resta con la altura
+    jng     drawEndAux             ; Si ax no es mayor que el ancho de la salida, salta a dibujar la siguiente fila
     ret                             ; Sino, Retornar
 
 drawWalls:                          ; Funcion encargada de dibujar las paredes
@@ -839,7 +839,7 @@ checkPlayerColision:                 ; Funcion encargada de verificar las colisi
     je      checkPlayerWallColision  ; En caso de que se cumpla, salta a la funcion de colision de paredes
     cmp     al, [wallsc2]           ; Compara el pixel leido con el color 2 de la pared
     je      checkPlayerWallColision  ; En caso de que se cumpla, salta a la funcion de colision de paredes
-    cmp     al, [bossc]             ; Compara el pixel leido con el color del jefe
+    cmp     al, [endc]             ; Compara el pixel leido con el color de la salida
     je      advanceGame               ; En caso de que se cumpla, reinica el juego
 
     pop     ax                      ; Restaura ax del stack

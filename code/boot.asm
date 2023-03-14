@@ -1,9 +1,10 @@
-org 0x7C00
-%define SECTOR_AMOUNT 0xa  ;Precompiler defined value for easy changing
+org 0x7C00					;Sets the origin of the program to 0x7C00,
+							;which is where the BIOS loads the bootloader into memory
+%define SECTOR_AMOUNT 0xa   ;Precompiler defined value for easy changing, number of sectors to read
 jmp short start
-nop
+nop							;Makes the program 512 bytes
 
-                                ; BPB
+                                ; BPB (Bios Parameter Block), values used by BIOS to read and write data to disk
 OEMLabel		db "Example "	; Disk label
 BytesPerSector		dw 512		; Bytes per sector
 SectorsPerCluster	db 1		; Sectors per cluster
@@ -18,22 +19,22 @@ Sides			dw 2		    ; Number of sides/heads
 HiddenSectors		dd 0		; Number of hidden sectors
 LargeSectors		dd 0		; Number of LBA sectors
 DriveNo			dw 0		    ; Drive No: 0
-Signature		db 41		    ; Drive signature: 41 for floppy
+Signature		db 41		    ; Drive signature: 41 for game
 VolumeID		dd 00000000h	; Volume ID: any number
 VolumeLabel		db "Example    "; Volume Label: any 11 chars
-FileSystem		db "FAT12   "	; File system type: don't change!
+FileSystem		db "FAT12   "	; File system type: do not change!
 start: 
 ; ------------------------------------------------------------------
 
 ;Initialize Registers
 cli
 xor ax, ax
-mov ds, ax
-mov ss, ax
-mov es, ax
+mov ds, ax						;data segment register
+mov ss, ax						;stack segment register
+mov es, ax						;extra segment register
 mov fs, ax
 mov gs, ax
-mov sp, 0x6ef0 ; setup the stack like qemu does
+mov sp, 0x6ef0 ; setup the stack pointer qemu does
 sti
 
                       ;Reset disk system
@@ -52,7 +53,7 @@ jc errorpart
 jmp 0x8000
 
 
-errorpart:            ;if stuff went wrong you end here so let's display a message
+errorpart:            ;if stuff went wrong, we end here so display a message
 mov si, errormsg
 mov bh, 0x00          ;page 0
 mov bl, 0x07          ;text attribute
